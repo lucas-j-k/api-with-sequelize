@@ -57,6 +57,15 @@ app.get('/api/v1/artworks', function(req, res, next){
 
 
 
+//Return all artists in the database
+app.get('/api/v1/artists', function(req, res, next){
+  models.Artist.findAll()
+    .then(function(artists){
+      res.json(artists);
+    });
+});
+
+
 
 
 
