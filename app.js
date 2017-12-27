@@ -34,7 +34,8 @@ var sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASS, {
 });
 
 //Import the Sequelize models. We import the whole folder, so Node will pull in index.js, which is where the associations are defined.
-// var models = require("../db/models");
+var models = require("./db/models");
+// var models = require("../node_modules/.bin/models");
 
 
 //===========================================
@@ -43,6 +44,15 @@ var sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASS, {
 
 app.get('/', function(req, res, next){
 	res.send('Home Route - nothing to see here yet ');
+});
+
+
+//Return all artworks in database
+app.get('/api/v1/artworks', function(req, res, next){
+  models.Artwork.findAll()
+    .then(function(artworks){
+      res.json(artworks);
+    });
 });
 
 
