@@ -16,6 +16,28 @@ app.use(validator());
 
 
 //===========================================
+//Connecting to database via Sequelize
+//===========================================
+
+//Pull database credentials from the environment variables.
+//They default to empty localhost config if no env variables are specified. Expects a database called 'recipe-demo'
+var DB_HOST = process.env.DB_HOST || "localhost";
+var DB_DATABASE = process.env.DB_DATABASE || "recipe-demo";
+var DB_USER = process.env.DB_USER || "root";
+var DB_PASS = process.env.DB_PASS || "";
+var DB_DIALECT = process.env.DB_DIALECT || "mysql";
+
+//instantiate sequelize and connect to the database. Credentials are pulled from the environment vars.
+var sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASS, {
+	host: DB_HOST,
+	dialect: DB_DIALECT
+});
+
+//Import the Sequelize models. We import the whole folder, so Node will pull in index.js, which is where the associations are defined.
+// var models = require("../db/models");
+
+
+//===========================================
 // Route Handlers
 //===========================================
 
@@ -40,12 +62,16 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+
 // error handler
-// define as the last app.use callback. This applies to /, app and auth routes, but api routes have their own error handler
+// called as the last middleware. Expects an error object as the first argument, which we pass in manually as part of the next() function
+//from within the other routes. This allows us to catch and handle errors in routes.
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  var errorMsg = 'Error: ' + err.status + " - " + err.message;
-  res.send(errorMsg);
+  var errorResponse = {};
+  errorResponse.status = err.status;
+  errorResponse.message = err.message;
+  res.json(errorResponse);
 });
 
 
