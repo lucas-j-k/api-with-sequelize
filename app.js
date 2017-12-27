@@ -22,7 +22,7 @@ app.use(validator());
 //Pull database credentials from the environment variables.
 //They default to empty localhost config if no env variables are specified. Expects a database called 'recipe-demo'
 var DB_HOST = process.env.DB_HOST || "localhost";
-var DB_DATABASE = process.env.DB_DATABASE || "recipe-demo";
+var DB_DATABASE = process.env.DB_DATABASE || "art-demo";
 var DB_USER = process.env.DB_USER || "root";
 var DB_PASS = process.env.DB_PASS || "";
 var DB_DIALECT = process.env.DB_DIALECT || "mysql";
