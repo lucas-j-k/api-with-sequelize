@@ -1,0 +1,2 @@
+# SequelizeJS Api Demo
+

@@ -1,0 +1,27 @@
+{
+  "name": "sequelize-api-demo",
+  "version": "1.0.0",
+  "description": "A demo Express app using SequelizeJS to interact with a MYSQL database.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Sequelize",
+    "sequelizejs",
+    "mysql",
+    "api",
+    "express",
+    "node"
+  ],
+  "author": "Luke",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-validator": "^4.3.0",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.28.6",
+    "sequelize-cli": "^3.2.0"
+  }
+}
