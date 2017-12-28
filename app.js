@@ -56,12 +56,41 @@ app.get('/api/v1/artworks', function(req, res, next){
 });
 
 
+//Return a single artwork based on id in url.
+app.get('/api/v1/artworks/:id', function(req, res, next){
+  models.Artwork.findById(req.params.id)
+    .then(function(artwork){
+      if(artwork){
+        res.json(artwork);
+      } else {
+        var err = new Error("Record Not Found");
+        err.status = 404;
+        return next(err);
+      }
+    });
+});
+
+
 
 //Return all artists in the database
 app.get('/api/v1/artists', function(req, res, next){
   models.Artist.findAll()
     .then(function(artists){
       res.json(artists);
+    });
+});
+
+//Return a single artist based on id in url.
+app.get('/api/v1/artists/:id', function(req, res, next){
+  models.Artist.findById(req.params.id)
+    .then(function(artist){
+      if(artist){
+        res.json(artist);
+      } else {
+        var err = new Error("Record Not Found");
+        err.status = 404;
+        return next(err);
+      }
     });
 });
 
