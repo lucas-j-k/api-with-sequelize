@@ -96,6 +96,30 @@ app.get('/api/v1/artists/:id', function(req, res, next){
 
 
 
+//Return all locations in the database
+app.get('/api/v1/locations', function(req, res, next){
+  models.Location.findAll()
+    .then(function(locations){
+      res.json(locations);
+    });
+});
+
+//Return a single location based on id in url.
+app.get('/api/v1/locations/:id', function(req, res, next){
+  models.Location.findById(req.params.id)
+    .then(function(location){
+      if(location){
+        res.json(location);
+      } else {
+        var err = new Error("Record Not Found");
+        err.status = 404;
+        return next(err);
+      }
+    });
+});
+
+
+
 
 
 //===========================================
