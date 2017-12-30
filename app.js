@@ -5,6 +5,11 @@ var Sequelize = require('sequelize');
 var validator = require('express-validator');
 
 
+//Import controllers which hold the CRUD methods for each model
+var artworksController = require('./db/controllers/artworks');
+var artistsController = require('./db/controllers/artists');
+var locationsController = require('./db/controllers/locations');
+
 //Instantiate Express
 var app = express();
 
@@ -20,14 +25,14 @@ app.use(validator());
 //===========================================
 
 //Pull database credentials from the environment variables.
-//They default to empty localhost config if no env variables are specified. Expects a database called 'recipe-demo'
+//They default to empty localhost config if no env variables are specified. Expects a database called 'art-demo'
 var DB_HOST = process.env.DB_HOST || "localhost";
 var DB_DATABASE = process.env.DB_DATABASE || "art-demo";
 var DB_USER = process.env.DB_USER || "root";
 var DB_PASS = process.env.DB_PASS || "";
 var DB_DIALECT = process.env.DB_DIALECT || "mysql";
 
-//instantiate sequelize and connect to the database. Credentials are pulled from the environment vars.
+//instantiate sequelize and connect to the database.
 var sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASS, {
 	host: DB_HOST,
 	dialect: DB_DIALECT
@@ -46,77 +51,23 @@ app.get('/', function(req, res, next){
 	res.send('Home Route - nothing to see here yet ');
 });
 
+//API endpoints and CRUD routes. These are functions defined in the artworks controller file.
 
-//Return all artworks in database
-app.get('/api/v1/artworks', function(req, res, next){
-  models.Artwork.findAll()
-    .then(function(artworks){
-      res.json(artworks);
-    });
-});
+//Artworks CRUD routes.
+app.get('/api/v1/artworks', artworksController.fetchAll);
+app.get('/api/v1/artworks/:id', artworksController.fetchOne);
 
 
-//Return a single artwork based on id in url.
-app.get('/api/v1/artworks/:id', function(req, res, next){
-  models.Artwork.findById(req.params.id)
-    .then(function(artwork){
-      if(artwork){
-        res.json(artwork);
-      } else {
-        var err = new Error("Record Not Found");
-        err.status = 404;
-        return next(err);
-      }
-    });
-});
+//Artists CRUD routes.
+app.get('/api/v1/artists', artistsController.fetchAll);
+app.get('/api/v1/artists/:id', artistsController.fetchOne);
 
 
-
-//Return all artists in the database
-app.get('/api/v1/artists', function(req, res, next){
-  models.Artist.findAll()
-    .then(function(artists){
-      res.json(artists);
-    });
-});
-
-//Return a single artist based on id in url.
-app.get('/api/v1/artists/:id', function(req, res, next){
-  models.Artist.findById(req.params.id)
-    .then(function(artist){
-      if(artist){
-        res.json(artist);
-      } else {
-        var err = new Error("Record Not Found");
-        err.status = 404;
-        return next(err);
-      }
-    });
-});
+//Locations CRUD routes.
+app.get('/api/v1/locations', locationsController.fetchAll);
+app.get('/api/v1/locations/:id', locationsController.fetchOne);
 
 
-
-//Return all locations in the database
-app.get('/api/v1/locations', function(req, res, next){
-  models.Location.findAll()
-    .then(function(locations){
-      res.json(locations);
-    });
-});
-
-//Return a single location based on id in url.
-app.get('/api/v1/locations/:id', function(req, res, next){
-  models.Location.findById(req.params.id)
-    .then(function(location){
-      if(location){
-        res.json(location);
-      } else {
-        var err = new Error("Record Not Found");
-        err.status = 404;
-        return next(err);
-      }
-    });
-});
 
 
 
