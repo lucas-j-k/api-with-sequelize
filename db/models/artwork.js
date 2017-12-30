@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     year: DataTypes.INTEGER,
     movement: DataTypes.STRING,
     medium: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  }, {});
+
+  Artwork.associate = function(models){
+  Artwork.belongsTo(models.Artist, { as : 'artist', foreignKey: 'creatorId' });
+  Artwork.belongsTo(models.Location, { as : 'location', foreignKey: 'locationId' });
+} 
+
   return Artwork;
 };

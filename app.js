@@ -70,9 +70,6 @@ app.get('/api/v1/locations/:id', locationsController.fetchOne);
 
 
 
-
-
-
 //===========================================
 // End of Route Handlers
 //===========================================

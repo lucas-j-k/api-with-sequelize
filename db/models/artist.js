@@ -6,12 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     nationality: DataTypes.STRING,
     born: DataTypes.INTEGER,
     died: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  }, {});
+
+  Artist.associate = function(models){
+    Artist.hasMany(models.Artwork, {as: 'artworks', foreignKey: 'creatorId'})
+  }
+
   return Artist;
 };

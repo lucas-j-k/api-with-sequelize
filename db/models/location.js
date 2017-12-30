@@ -4,12 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     town: DataTypes.STRING,
     country: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  }, {});
+
+  Location.associate = function(models){
+    Location.hasMany(models.Artwork, {as: 'artworks', foreignKey: 'locationId'})
+  }
+
   return Location;
 };

@@ -3,7 +3,12 @@ var models = require('../models');
 module.exports = {
 	//List all authors
 	fetchAll(req, res){
-		models.Artist.findAll()
+		models.Artist.findAll({
+			include: [{
+				model: models.Artwork,
+				as: 'artworks'
+			}]
+		})
 		.then(function(artists){
 			res.status(200).json(artists);
 		})
