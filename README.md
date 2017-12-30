@@ -1,9 +1,46 @@
 # SequelizeJS Api Demo
 
+## Overview
 
-## Migrating
-make sure Sequelize-CLI is installed globally, then you can run migrations and seeds from the app root in the command line. This saves copying everything out of the node_modules folder. Because of the paths specified in the .sequelizerc file, the new model, migration and seed files will go into the respective /db/ folders. This allows us to track them through Git.
+This is a simple JSON based REST API, built with Node, Express and the Sequelize ORM. It uses Artists, Artworks and Museum locations as sample information.
 
-If you create the sequelizerc file before you do the sequelize init, it will generate these folders for you.
+
+## Setup
+	- What is needed to make the repo run once downloaded.
+
+
+## The Sequelizerc and Sequelize Config files
+	- What do these two files do and what info do we need to add/change?
+
+
+## Directory Structure
+ - Explain durectory structure, models, controller folder etc..
+
+
+## Migrations
+	- Explain what the migrations do and how to run them in the CLI
+
+
+## Seeding Data
+	- What do the Sequelize seed files do, and how to run them
+
+
+## Sequelize Models
+	- How to define sequelize models and use them in routes / controllers
+
+
+
+
+## Associating Models and Using Sequelize Relationships
+	- How do we define relationships between models, how do we add the references between tables in the database during a migration, how do we display related database records as part of the JSON response, e.g displaying an array of artworks associated with an artist.
+
+
+
+## Misc. Sequelize Info
+	- Any other relevant Sequelize notes that might be useful in future
+
+
+
+
 
 
