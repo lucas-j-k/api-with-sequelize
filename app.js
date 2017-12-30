@@ -20,38 +20,21 @@ app.use(bodyParser.json());
 app.use(validator());
 
 
-//===========================================
-//Connecting to database via Sequelize
-//===========================================
-
-//Pull database credentials from the environment variables.
-//They default to empty localhost config if no env variables are specified. Expects a database called 'art-demo'
-var DB_HOST = process.env.DB_HOST || "localhost";
-var DB_DATABASE = process.env.DB_DATABASE || "art-demo";
-var DB_USER = process.env.DB_USER || "root";
-var DB_PASS = process.env.DB_PASS || "";
-var DB_DIALECT = process.env.DB_DIALECT || "mysql";
-
-//instantiate sequelize and connect to the database.
-var sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASS, {
-	host: DB_HOST,
-	dialect: DB_DIALECT
-});
-
-//Import the Sequelize models. We import the whole folder, so Node will pull in index.js, which is where the associations are defined.
+//Import the Sequelize models. We import the whole folder, so Node will pull in index.js, which is where the connection o
+//sequelize is made.
 var models = require("./db/models");
-// var models = require("../node_modules/.bin/models");
 
 
 //===========================================
 // Route Handlers
 //===========================================
 
+//Basic home route with documentation. Just for presentation, not functional.
 app.get('/', function(req, res, next){
 	res.send('Home Route - nothing to see here yet ');
 });
 
-//API endpoints and CRUD routes. These are functions defined in the artworks controller file.
+//API endpoints and CRUD routes. The second arguments are referring to functions defined in the individual controller files.
 
 //Artworks CRUD routes.
 app.get('/api/v1/artworks', artworksController.fetchAll);
