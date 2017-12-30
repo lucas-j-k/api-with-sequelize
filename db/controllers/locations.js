@@ -18,7 +18,12 @@ module.exports = {
 	},
 
 	fetchOne(req, res){
-		models.Location.findById(req.params.id)
+		models.Location.findById(req.params.id, {
+			include: [{
+				model: models.Artwork,
+				as: 'artworks'
+			}]
+		})
 		.then(function(location){
 			res.status(200).json(location);
 		})
