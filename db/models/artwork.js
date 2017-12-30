@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Artwork.associate = function(models){
-  Artwork.belongsTo(models.Artist, { as : 'artist', foreignKey: 'creatorId' });
+  Artwork.belongsTo(models.Artist, { as : 'artist', foreignKey: 'artistId' });
   Artwork.belongsTo(models.Location, { as : 'location', foreignKey: 'locationId' });
 } 
 

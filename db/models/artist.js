@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Artist.associate = function(models){
-    Artist.hasMany(models.Artwork, {as: 'artworks', foreignKey: 'creatorId'})
+    Artist.hasMany(models.Artwork, {as: 'artworks', foreignKey: 'artistId'})
   }
 
   return Artist;
