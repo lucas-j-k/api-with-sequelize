@@ -1,7 +1,6 @@
 var models = require('../models');
 
 module.exports = {
-	//List all authors
 	fetchAll(req, res){
 		models.Location.findAll({
 			include: [{

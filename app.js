@@ -13,14 +13,14 @@ var locationsController = require('./db/controllers/locations');
 //Instantiate Express
 var app = express();
 
-//Set up body-parser to enable us to read JSON requests and send responses
+//Set up body-parser with JSON
 app.use(bodyParser.json());
 
 //Initialize express-validator to check incoming POST request values.
 app.use(validator());
 
 
-//Import the Sequelize models. We import the whole folder, so Node will pull in index.js, which is where the connection o
+//Import the Sequelize models. We import the whole folder, so Node will pull in index.js, which is where the connection to
 //sequelize is made.
 var models = require("./db/models");
 
@@ -44,6 +44,9 @@ app.get('/api/v1/artworks/:id', artworksController.fetchOne);
 //Artists CRUD routes.
 app.get('/api/v1/artists', artistsController.fetchAll);
 app.get('/api/v1/artists/:id', artistsController.fetchOne);
+app.post('/api/v1/artists/', artistsController.create);
+app.put('/api/v1/artists/:id', artistsController.update);
+app.delete('/api/v1/artists/:id', artistsController.delete);
 
 
 //Locations CRUD routes.
