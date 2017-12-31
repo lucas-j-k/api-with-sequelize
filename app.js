@@ -39,6 +39,9 @@ app.get('/', function(req, res, next){
 //Artworks CRUD routes.
 app.get('/api/v1/artworks', artworksController.fetchAll);
 app.get('/api/v1/artworks/:id', artworksController.fetchOne);
+app.post('/api/v1/artworks/', artworksController.create);
+app.put('/api/v1/artworks/:id', artworksController.update);
+app.delete('/api/v1/artworks/:id', artworksController.delete);
 
 
 //Artists CRUD routes.
@@ -52,6 +55,9 @@ app.delete('/api/v1/artists/:id', artistsController.delete);
 //Locations CRUD routes.
 app.get('/api/v1/locations', locationsController.fetchAll);
 app.get('/api/v1/locations/:id', locationsController.fetchOne);
+app.post('/api/v1/locations/', locationsController.create);
+app.put('/api/v1/locations/:id', locationsController.update);
+app.delete('/api/v1/locations/:id', locationsController.delete);
 
 
 
